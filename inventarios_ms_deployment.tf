@@ -48,7 +48,7 @@ provider "aws" {
 # Variables locales usadas en la configuración de Terraform.
 locals {
   project_name = "${var.project_prefix}-microservices"
-  repository   = "https://github.com/ISIS2503/ISIS2503-Microservices-AppDjango.git"
+  repository   = "https://github.com/andresjulianbolivar/provesiapp-microservicios"
 
   common_tags = {
     Project   = local.project_name
@@ -177,11 +177,11 @@ resource "aws_instance" "inventarios_ms" {
               mkdir -p /labs
               cd /labs
 
-              if [ ! -d ISIS2503-Microservices-AppDjango ]; then
+              if [ ! -d provesiapp-microservicios ]; then
                 git clone ${local.repository}
               fi
               
-              cd ISIS2503-Microservices-AppDjango/places
+              cd provesiapp-microservicios/inventarios
 
               sudo apt install -y python3.12-venv
               sudo python3 -m venv venv
