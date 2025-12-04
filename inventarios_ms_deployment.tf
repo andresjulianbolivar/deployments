@@ -207,5 +207,5 @@ output "inventarios_db_private_ip" {
 # Salida. Muestra las direcciones IP públicas de la instancia de Places MS.
 output "inventarios_ms_public_ips" {
   description = "Public IP address for the Inventarios Microservice instance"
-  value       = { for id, instance in aws_instance.inventarios_ms : id => instance.public_ip }aws_instance.inventarios_ms.public_ip
+  value       = { for id, instance in aws_instance.inventarios_ms : id => instance.public_ip }
 }
