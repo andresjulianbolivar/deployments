@@ -30,7 +30,7 @@ variable "region" {
 variable "project_prefix" {
   description = "Prefix used for naming AWS resources"
   type        = string
-  default     = "msd"
+  default     = "ms"
 }
 
 # Variable. Define el tipo de instancia EC2 a usar para las máquinas virtuales.
