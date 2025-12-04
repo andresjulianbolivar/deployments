@@ -160,6 +160,7 @@ resource "aws_instance" "inventarios_db" {
 # Recurso. Define la instancia EC2 para el microservicio de Places (FastAPI).
 # Esta instancia incluye un script de creación para instalar el microservicio de Places y aplicar las migraciones.
 resource "aws_instance" "inventarios_ms" {
+  for_each = toset(["a","b","c"])
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
   associate_public_ip_address = true
@@ -190,7 +191,7 @@ resource "aws_instance" "inventarios_ms" {
               EOT
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_prefix}-inventarios-ms"
+    Name = "${var.project_prefix}-inventarios-ms-${each.key}"
     Role = "inventarios-ms"
   })
 
@@ -204,7 +205,7 @@ output "inventarios_db_private_ip" {
 }
 
 # Salida. Muestra las direcciones IP públicas de la instancia de Places MS.
-output "inventarios_ms_public_ip" {
+output "inventarios_ms_public_ips" {
   description = "Public IP address for the Inventarios Microservice instance"
-  value       = aws_instance.inventarios_ms.public_ip
+  value       = { for id, instance in aws_instance.inventarios_ms : id => instance.public_ip }aws_instance.inventarios_ms.public_ip
 }
